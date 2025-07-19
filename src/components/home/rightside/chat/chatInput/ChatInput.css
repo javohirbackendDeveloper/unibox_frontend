@@ -1,0 +1,67 @@
+/* ChatInput.css */
+.chat-input-container {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 12px;
+  border-top: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.chat-input-container .icon {
+  cursor: pointer;
+  color: #666;
+  width: 24px;
+  height: 24px;
+  transition: color 0.3s ease;
+}
+
+.hidden-file-input {
+  display: none;
+}
+
+.file-upload-label {
+  cursor: pointer;
+}
+
+.file-upload-label .icon {
+  color: #666;
+  width: 24px;
+  height: 24px;
+  transition: color 0.3s ease;
+}
+
+.file-upload-label .icon:hover {
+  color: #000;
+}
+
+.chat-input-container .icon:hover {
+  color: #111;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.chat-input:focus {
+  border-color: #007bff;
+}
+
+.mic-icon {
+  color: #007bff;
+}
+
+.btn {
+  border: none;
+  background-color: inherit;
+}
+
+.active {
+  color: blue;
+}

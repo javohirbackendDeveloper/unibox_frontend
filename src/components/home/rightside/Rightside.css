@@ -1,0 +1,10 @@
+.rightside {
+  width: 100%;
+  height: 100%;
+}
+
+.rightside-logo {
+  max-width: 100%;
+  margin-left: 400px;
+  margin-top: 200px;
+}

@@ -1,0 +1,132 @@
+.leftside-container {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.leftside-container .search-box {
+  display: flex;
+  align-items: center;
+  background-color: #f2f2f2;
+  padding: 8px 12px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: 50px;
+  border-radius: 8px;
+  margin: 16px 0;
+  flex-shrink: 0;
+}
+
+.leftside-container .search-box .search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  margin-left: 8px;
+  margin-top: 20px;
+  font-size: 14px;
+  flex: 1;
+}
+
+.leftside-container .search-box .search-icon {
+  color: #666;
+}
+
+.leftside-container .chat-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.leftside-container .chat-list .chat-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.leftside-container .chat-list .chat-item:hover {
+  background-color: #f0f0f0;
+}
+
+.leftside-container .chat-list .chat-item .avatar-wrapper {
+  position: relative;
+  margin-right: 12px;
+}
+
+.leftside-container .chat-list .chat-item .avatar-wrapper .avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.leftside-container .chat-list .chat-item .avatar-wrapper .online-indicator {
+  position: absolute;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background-color: #28c76f;
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+.leftside-container .chat-list .chat-item .chat-content {
+  flex: 1;
+}
+.leftside-container .chat-list .chat-item:hover .chat-content {
+  background-color: #f0f0f0;
+}
+
+.leftside-container .chat-list .chat-item:hover .chat-header {
+  background-color: #f0f0f0;
+}
+
+.leftside-container .chat-list .chat-item .chat-content .chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.leftside-container
+  .chat-list
+  .chat-item
+  .chat-content
+  .chat-header
+  .chat-name {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.leftside-container
+  .chat-list
+  .chat-item
+  .chat-content
+  .chat-header
+  .chat-time {
+  font-size: 12px;
+  color: #888;
+}
+
+.leftside-container .chat-list .chat-item .chat-content .chat-message {
+  font-size: 13px;
+  color: #666;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.leftside-container .no-chat {
+  text-align: center;
+  color: #aaa;
+  margin-top: 20px;
+}

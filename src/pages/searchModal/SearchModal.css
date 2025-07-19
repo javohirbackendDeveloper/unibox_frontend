@@ -1,0 +1,129 @@
+.modal-container {
+  width: 500px;
+  padding: 24px 20px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  position: relative;
+  font-family: "Segoe UI", sans-serif;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.close-icon {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s ease;
+}
+
+.close-icon:hover {
+  color: #000;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.search-input {
+  width: 90%;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 15px;
+  outline: none;
+  margin-bottom: 20px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 0 0 transparent;
+}
+
+.search-input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+.user-list {
+  max-height: 280px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+
+.user-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.user-list::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.user-card:hover {
+  background-color: #ececec;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 30px 0;
+  color: #777;
+}
+
+.empty-image {
+  width: 90px;
+  margin-bottom: 10px;
+  opacity: 0.6;
+}
+
+.empty-text {
+  font-size: 15px;
+}
+
+.invite-button {
+  margin-left: auto;
+  padding: 8px 14px;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.3);
+}
+
+.invite-button:hover {
+  background: linear-gradient(135deg, #4338ca, #4f46e5);
+  transform: translateY(-1px);
+}

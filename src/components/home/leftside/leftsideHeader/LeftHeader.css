@@ -1,0 +1,35 @@
+.left-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.icon-button:hover {
+  background-color: #e2e6ea;
+}
+
+.user-button svg,
+.logout-button svg {
+  width: 24px;
+  height: 24px;
+  color: #333;
+}
+
+.user_profile_img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
