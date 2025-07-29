@@ -1,0 +1,91 @@
+.notification-tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 8px;
+}
+
+.notification-tabs button {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.notification-tabs .active {
+  background-color: #1976d2;
+  color: white;
+}
+
+.notification-tabs .inactive {
+  border: 1px solid #1976d2;
+  color: #1976d2;
+  background: white;
+}
+
+.invite-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.invite-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fafafa;
+  transition: background-color 0.2s ease;
+}
+
+.invite-item:hover {
+  background-color: #f0f0f0;
+}
+
+.invite-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.invite-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.invite-actions button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  background-color: #1976d2;
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.invite-actions button:hover {
+  background-color: #145a9e;
+}
+
+.dialogtitle {
+  position: relative;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.x-icon {
+  position: absolute;
+  left: 200px;
+}
+
+.accept_btn {
+  margin-right: 10px;
+}

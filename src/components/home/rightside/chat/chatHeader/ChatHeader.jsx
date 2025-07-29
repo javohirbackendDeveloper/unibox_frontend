@@ -1,13 +1,14 @@
 import { users } from "../../../../../dummyData/user";
 import { Button, Dialog } from "@mui/material";
-import { Crown, Phone, Video, X } from "lucide-react";
+import { Crown, Phone, Trash, Video, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import "./ChatHeader.css";
 import { AuthStore } from "../../../../../stores/auth.store";
+import { FriendshipStore } from "../../../../../stores/friendshipStore";
 
-function ChatHeader({ selectedChat }) {
-  const isGroup = true;
+function ChatHeader({ selectedChat, setSelectedChat }) {
+  const { cancelInvite } = FriendshipStore();
   const [open, onClose] = useState(false);
   const { onlineUsers } = AuthStore();
 
@@ -23,7 +24,12 @@ function ChatHeader({ selectedChat }) {
           {selectedChat?.isGroup ? (
             <span>A'zolarni ko'rish</span>
           ) : onlineUsers.includes(selectedChat?.user?.id) ? (
-            <span className="online-text">onlayn</span>
+            <span
+              className="online-text"
+              style={{ color: "green", fontWeight: 700 }}
+            >
+              onlayn
+            </span>
           ) : (
             <span className="ofline-text">oflayn</span>
           )}
@@ -31,49 +37,32 @@ function ChatHeader({ selectedChat }) {
       </Button>
 
       <div className="header-icons">
-        <Phone />
-        <Link to={"/video-call"}>
+        <button
+          onClick={() => {
+            cancelInvite(selectedChat?.friendship?.id) &&
+              setSelectedChat(false);
+          }}
+          className="icon-btn"
+        >
+          <Trash size={20} color="red" />
+        </button>
+        <a href="video-call" target="_blank" rel="noopener noreferrer">
           <Video />
-        </Link>
-        <X onClick={() => selectedChat(false)} />
+        </a>
+
+        <X onClick={() => setSelectedChat(false)} />
       </div>
 
       <Dialog
         open={open}
         onClose={() => onClose(false)}
-        PaperProps={{
-          sx: {
-            padding: 3,
-            minWidth: 320,
-            maxHeight: "80vh",
-            overflowY: "auto",
-            borderRadius: "12px",
-            backgroundColor: "#fff",
-          },
-        }}
+        className="image-modal"
       >
-        <div className="dialog-content">
-          <div className="dialog-header">
-            <span>Guruh a'zolari</span>
-            <Button onClick={() => onClose(false)} className="close-btn">
-              <X />
-            </Button>
-          </div>
-
-          {/* Foydalanuvchilar ro'yhati */}
-          {users.map((user, idx) => (
-            <div className="user-row" key={idx}>
-              <div className="avatar-wrapper">
-                <img src={user?.image ? user.image : "./avatar.png"} alt="" />
-                {user?.isOnline && <span className="online"></span>}
-              </div>
-              <span className="user-name">
-                {user?.name ? user.name : user?.email?.split("@")[0]}
-              </span>
-              {user?.admin && <Crown size={16} className="crown-icon" />}
-            </div>
-          ))}
-        </div>
+        <img
+          src={selectedChat?.user?.imager || "./avatar.png"}
+          alt=""
+          className="modal-avatar"
+        />
       </Dialog>
     </div>
   );

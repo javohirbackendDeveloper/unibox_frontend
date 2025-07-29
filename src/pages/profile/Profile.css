@@ -1,0 +1,121 @@
+.profile-container {
+  position: relative;
+  padding: 40px;
+  min-width: 450px;
+  overflow: hidden;
+}
+
+.close-button {
+  position: absolute !important;
+  top: 10px;
+  right: 10px;
+}
+
+.profile-title {
+  text-align: center;
+  font-weight: 600;
+}
+
+.profile-content {
+  overflow: hidden !important;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 20px;
+  text-align: center;
+}
+
+.stat-number {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #666;
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.profile-info p {
+  color: #888;
+  margin: 0;
+}
+
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.action-btn {
+  width: 100%;
+  height: 40px; /* barcha tugmalarni bir xil balandlikda qilish */
+  text-transform: none;
+}
+
+.name-input {
+  width: 100%;
+}
+
+.password-modal {
+  min-width: 400px;
+  min-height: 200px;
+}
+
+.password-modal .password-field {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.password-modal .eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.image-modal .MuiDialog-paper {
+  background: transparent;
+  box-shadow: none;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-avatar {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+}

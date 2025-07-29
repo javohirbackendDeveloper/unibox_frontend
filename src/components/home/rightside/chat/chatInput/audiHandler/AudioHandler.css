@@ -1,0 +1,54 @@
+.audio-handler {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  background-color: #000;
+  border-radius: 12px;
+  width: 40%;
+  margin-left: 500px;
+}
+
+.audio-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  padding: 8px;
+}
+
+.audio-wave {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  flex: 1;
+  height: 30px;
+}
+
+.audio-wave span {
+  width: 4px;
+  background: #4caf50;
+  border-radius: 2px;
+  transition: height 0.1s linear;
+}
+
+.wave-placeholder {
+  flex: 1;
+}
+
+.delete-btn {
+  color: #e74c3c;
+}
+.mic-btn {
+  color: #4caf50;
+}
+.pause-btn {
+  color: #ff9800;
+}
+.play-btn {
+  color: #2196f3;
+}

@@ -16,6 +16,7 @@ export const ChatStore = create((set, get) => ({
           friendship: friendshipId,
           senderId: res.data.sender.id,
           file: res.data.image,
+          voice: res.data?.voice,
         });
 
         await get().getMessages(friendshipId);
@@ -28,8 +29,6 @@ export const ChatStore = create((set, get) => ({
   async getMyFriends() {
     try {
       const res = await axiosInstance.get("/api/friendship/getAllMyFriends");
-
-      console.log({ res });
 
       if (res.data[0]) {
         set({ chats: res.data });
@@ -44,7 +43,13 @@ export const ChatStore = create((set, get) => ({
       const res = await axiosInstance.get("/api/message/" + friendshipId);
 
       if (res.data[0]) {
-        set({ messages: res.data });
+        ChatStore.setState((state) => {
+          const updated = res.data.map((msg) => {
+            const existing = state.messages.find((m) => m.id === msg.id);
+            return existing?.isRead ? { ...msg, isRead: true } : msg;
+          });
+          return { messages: updated };
+        });
       }
     } catch (err) {
       console.log("friendship errror", err);
@@ -67,3 +72,14 @@ export const ChatStore = create((set, get) => ({
     });
   },
 }));
+
+socket.off("messages_read").on("messages_read", ({ friendshipId }) => {
+  ChatStore.setState((state) => {
+    const updated = state.messages.map((msg) =>
+      msg.friendship === friendshipId || msg.friendship?.id === friendshipId
+        ? { ...msg, isRead: true }
+        : msg
+    );
+    return { messages: updated };
+  });
+});

@@ -72,8 +72,8 @@
 .leftside-container .chat-list .chat-item .avatar-wrapper .online-indicator {
   position: absolute;
   right: 0;
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   background-color: #28c76f;
   border: 2px solid white;
   border-radius: 50%;

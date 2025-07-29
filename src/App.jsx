@@ -1,24 +1,22 @@
 import React, { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/home/Home";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import { Toaster } from "sonner";
 import { AuthStore } from "./stores/auth.store";
-import { account } from "./appwriteConfig"; // 👈 Bu muhim
+import { account } from "./appwriteConfig";
 import OAuthCallback from "./pages/auth/OauthCallback";
 import { socket } from "./socket";
 import VideoCall from "./pages/video-call/VideoCall";
+import Profile from "./pages/profile/Profile";
+import Leftside from "./components/home/leftside/Leftside";
+import EditingZone from "./pages/textEditor/editingZone/EditingZone";
+import { v4 as uuidV4 } from "uuid";
 
 function App() {
-  const {
-    fetchUserInfo,
-    user,
-    setUser,
-    setOfflineUser,
-    setOnlineUser,
-    onlineUsers,
-  } = AuthStore();
+  const { fetchUserInfo, user, setUser, setOfflineUser, setOnlineUser } =
+    AuthStore();
 
   useEffect(() => {
     (async () => {
@@ -27,11 +25,12 @@ function App() {
 
         if (accessToken) {
           await fetchUserInfo();
+        } else {
+          const userData = await account.get();
+          console.log({ userData });
+
+          // setUser(userData);
         }
-        // else {
-        //   const userData = await account.get();
-        //   setUser(userData);
-        // }
       } catch (err) {
         setUser(null);
       }
@@ -55,8 +54,6 @@ function App() {
     });
   }, []);
 
-  console.log({ onlineUsers });
-
   return (
     <div>
       <Routes>
@@ -65,6 +62,11 @@ function App() {
         <Route path="/register" element={user ? <Home /> : <Register />} />
         <Route path="/oauth-callback" element={<OAuthCallback />} />
         <Route path="/video-call" element={<VideoCall />} />
+        <Route
+          path="/editingZone"
+          element={<Navigate to={`/editingZone/${uuidV4()}`} replace />}
+        />
+        <Route path="/editingZone/:id" element={<EditingZone />} />
       </Routes>
       <Toaster
         position="top-right"

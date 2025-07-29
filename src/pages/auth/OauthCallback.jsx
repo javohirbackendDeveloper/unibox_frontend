@@ -12,9 +12,11 @@ const OAuthCallback = () => {
       try {
         const appwriteUser = await account.get();
 
-        await login({ email: appwriteUser.email });
+        const res = await login({ email: appwriteUser.email }, navigate);
 
-        navigate("/");
+        console.log({ res });
+
+        if (res) navigate("/");
       } catch (err) {
         console.error("OAuth callback error", err);
         navigate("/login");

@@ -2,14 +2,16 @@
   height: 100%;
   overflow-y: auto;
   padding: 20px;
-  background-color: #e5ddd5;
+  background-image: url("./chatBc.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
   gap: 12px;
 }
 
-/* Xabar o‘rami */
 .message-wrapper {
   display: flex;
   align-items: flex-end;
@@ -91,4 +93,25 @@
 
 .wave-button:hover {
   transform: scale(1.2);
+}
+
+.message-created-at {
+  bottom: 4px;
+  right: 8px;
+  font-size: 10px;
+  color: #585050;
+}
+
+.message-content video {
+  width: 90%;
+  margin-top: -85px;
+}
+
+.message-content .check-icon,
+.message-content .checkcheck-icon {
+  width: 14px;
+  height: 14px;
+  color: #1c0292;
+  margin-left: 4px;
+  vertical-align: middle;
 }

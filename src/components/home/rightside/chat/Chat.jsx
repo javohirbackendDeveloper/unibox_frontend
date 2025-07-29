@@ -8,7 +8,10 @@ function Chat({ setSelectedChat, selectedChat }) {
   return (
     <div className="chat-container">
       <div className="chat-header-section">
-        <ChatHeader selectedChat={selectedChat} />
+        <ChatHeader
+          selectedChat={selectedChat}
+          setSelectedChat={setSelectedChat}
+        />
       </div>
 
       <div className="chat-main-section">

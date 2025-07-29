@@ -37,11 +37,9 @@ const Register = () => {
   const handleGoogleLogin = async () => {
     account.createOAuth2Session(
       "google",
-      "http://localhost:5173",
+      "http://localhost:5173/login",
       "http://localhost:5173/fail"
     );
-
-    window.location.href = "/login";
   };
 
   useEffect(() => {

@@ -10,7 +10,6 @@ function Leftside({ setSelectedChat, selectedChat }) {
   const [search, setSearch] = useState("");
   const { getMyFriends, chats } = FriendshipStore();
   const { user, fetchUserInfo, onlineUsers } = AuthStore();
-
   useEffect(() => {
     fetchUserInfo();
   }, []);
@@ -24,8 +23,6 @@ function Leftside({ setSelectedChat, selectedChat }) {
   useEffect(() => {
     getMyFriends();
   }, []);
-
-  console.log({ onlineUsers });
 
   return (
     <div className="leftside-container">
@@ -68,30 +65,13 @@ function Leftside({ setSelectedChat, selectedChat }) {
                       "Private chat"}
                   </p>
                   <div className="chat-meta">
-                    {chat?.friendship?.senderId === user?.id && (
+                    {chat?.user?.id === user?.id && (
                       <CheckCheck className="check-icon" size={14} />
                     )}
                     <span className="chat-time">
                       {dayjs(chat?.friendship?.createdAt).format("HH:mm")}
                     </span>
                   </div>
-                </div>
-
-                <div className="chat-message">
-                  {chat?.friendship?.lastMessage.length <= 30
-                    ? chat?.friendship?.lastMessage
-                    : chat?.friendship?.lastMessage.slice(0, 30) + "..."}
-                </div>
-
-                <div className="chat-message">
-                  {chat?.lastMessage?.messageType === "text" &&
-                    chat?.lastMessage?.content.slice(0, 30) + "..."}
-                  {chat?.lastMessage?.messageType === "image" && (
-                    <Image size={14} />
-                  )}
-                  {chat?.lastMessage?.messageType === "video" && (
-                    <Video size={14} />
-                  )}
                 </div>
               </div>
             </div>

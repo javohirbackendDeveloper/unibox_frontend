@@ -22,7 +22,12 @@ export default function VideoCall() {
   const { user, fetchUserInfo } = AuthStore();
   const callContainerRef = React.useRef(null);
 
-  const roomID = getUrlParams().get("roomID") || randomID(5);
+  let roomID = getUrlParams().get("roomID");
+  if (!roomID) {
+    roomID = randomID(5);
+    const newURL = `${window.location.origin}${window.location.pathname}?roomID=${roomID}`;
+    window.history.replaceState(null, "", newURL);
+  }
 
   React.useEffect(() => {
     fetchUserInfo();
