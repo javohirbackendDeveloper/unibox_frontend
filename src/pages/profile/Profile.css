@@ -119,3 +119,55 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
+/* RESPONSIVE PART */
+
+@media (max-width: 600px) {
+  .profile-container {
+    padding: 20px;
+    min-width: auto;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .profile-stats {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .profile-card {
+    gap: 10px;
+  }
+
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .profile-info h2 {
+    font-size: 18px;
+  }
+
+  .profile-info p {
+    font-size: 14px;
+  }
+
+  .action-btn {
+    height: 38px;
+    font-size: 14px;
+  }
+
+  .password-modal {
+    min-width: 100%;
+    padding: 10px;
+  }
+
+  .modal-avatar {
+    width: 180px;
+    height: 180px;
+  }
+}

@@ -1,5 +1,3 @@
-import { messages } from "../../../dummyData/user";
-import React, { useState } from "react";
 import "./Rightside.css";
 import Chat from "./chat/Chat";
 

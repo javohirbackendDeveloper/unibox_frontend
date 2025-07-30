@@ -127,3 +127,51 @@
   background: linear-gradient(135deg, #4338ca, #4f46e5);
   transform: translateY(-1px);
 }
+
+/* RESPONSIVE PART */
+
+@media (max-width: 600px) {
+  .modal-container {
+    width: 100%;
+    padding: 20px 16px;
+    border-radius: 12px;
+  }
+
+  .modal-title {
+    font-size: 18px;
+    margin-bottom: 14px;
+  }
+
+  .search-input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .user-card {
+    padding: 8px 12px;
+    gap: 10px;
+  }
+
+  .user-name {
+    font-size: 14px;
+  }
+
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .invite-button {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  .empty-text {
+    font-size: 14px;
+  }
+
+  .empty-image {
+    width: 70px;
+  }
+}

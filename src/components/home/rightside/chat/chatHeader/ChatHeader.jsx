@@ -1,35 +1,58 @@
-import { users } from "../../../../../dummyData/user";
 import { Button, Dialog } from "@mui/material";
-import { Crown, Phone, Trash, Video, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Trash, Video, X } from "lucide-react";
+import { FcLeft } from "react-icons/fc";
 import React, { useState } from "react";
 import "./ChatHeader.css";
 import { AuthStore } from "../../../../../stores/auth.store";
 import { FriendshipStore } from "../../../../../stores/friendshipStore";
+import { ChatStore } from "../../../../../stores/chat.store";
+import { useNavigate } from "react-router-dom";
 
 function ChatHeader({ selectedChat, setSelectedChat }) {
   const { cancelInvite } = FriendshipStore();
-  const [open, onClose] = useState(false);
+  const [open, setOpen] = useState(false);
   const { onlineUsers } = AuthStore();
+  const { sendMessage } = ChatStore();
+  const isDesktop = () => window.innerWidth >= 768;
+  const navigate = useNavigate();
+  const handleVideoCallClick = () => {
+    const roomID = Math.random().toString(36).substring(2, 8);
+    const videoCallLink = `${window.location.origin}/video-call?roomID=${roomID}`;
+
+    const friendshipId = selectedChat?.friendship?.id;
+    sendMessage(
+      { text: `${videoCallLink}`, friendship: selectedChat?.friendship },
+      friendshipId
+    );
+
+    if (isDesktop()) {
+      window.open(videoCallLink, "_blank", "noopener,noreferrer");
+    } else {
+      setOpen(true);
+      navigate(`/video-call?roomID=${roomID}`);
+    }
+  };
 
   return (
     <div className="chat-header">
-      <Button onClick={() => onClose(true)} className="main-header-btn">
-        <img src="./avatar.png" alt="User avatar" />
+      <button className="left_icon" onClick={() => setSelectedChat(null)}>
+        <FcLeft size={24} />
+      </button>
+
+      <Button onClick={() => setOpen(true)} className="main-header-btn">
+        <img
+          src={selectedChat?.user?.image || "./avatar.png"}
+          alt="User avatar"
+        />
         <div className="header-text">
           <span>
             {selectedChat?.user?.name ||
               selectedChat?.user?.email.split("@")[0]}
           </span>
           {selectedChat?.isGroup ? (
-            <span>A'zolarni ko'rish</span>
+            <span>A'zolarni ko‘rish</span>
           ) : onlineUsers.includes(selectedChat?.user?.id) ? (
-            <span
-              className="online-text"
-              style={{ color: "green", fontWeight: 700 }}
-            >
-              onlayn
-            </span>
+            <span className="online-text">onlayn</span>
           ) : (
             <span className="ofline-text">oflayn</span>
           )}
@@ -39,29 +62,45 @@ function ChatHeader({ selectedChat, setSelectedChat }) {
       <div className="header-icons">
         <button
           onClick={() => {
-            cancelInvite(selectedChat?.friendship?.id) &&
-              setSelectedChat(false);
+            cancelInvite(selectedChat?.friendship?.id);
+            setSelectedChat(null);
           }}
           className="icon-btn"
+          aria-label="Cancel Invite"
         >
           <Trash size={20} color="red" />
         </button>
-        <a href="video-call" target="_blank" rel="noopener noreferrer">
-          <Video />
-        </a>
 
-        <X onClick={() => setSelectedChat(false)} />
+        <button
+          onClick={handleVideoCallClick}
+          className="icon-btn"
+          aria-label="Start Video Call"
+        >
+          <Video />
+        </button>
+
+        <button
+          onClick={() => setSelectedChat(null)}
+          className="icon-btn"
+          aria-label="Close Chat"
+        >
+          <X />
+        </button>
       </div>
 
       <Dialog
         open={open}
-        onClose={() => onClose(false)}
-        className="image-modal"
+        onClose={() => setOpen(false)}
+        fullWidth
+        maxWidth="md"
+        className="video-call-modal"
       >
-        <img
-          src={selectedChat?.user?.imager || "./avatar.png"}
-          alt=""
-          className="modal-avatar"
+        <iframe
+          title="Video Call"
+          src="/video-call"
+          width="100%"
+          height="500px"
+          style={{ border: "none" }}
         />
       </Dialog>
     </div>

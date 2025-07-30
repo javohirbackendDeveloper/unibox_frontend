@@ -70,14 +70,18 @@ function LeftsideHeader() {
           <span className="notification-badge">{unReadInvites.length}</span>
         )}
       </button>
-      <a
-        href={"/editingZone"}
+      <button
         className="icon-button logout-button"
-        target="_blank"
-        rel="noopener noreferer"
+        onClick={() => {
+          if (window.innerWidth > 768) {
+            window.open("/editingZone", "_blank", "noopener,noreferrer");
+          } else {
+            window.location.href = "/editingZone";
+          }
+        }}
       >
         <File />
-      </a>
+      </button>
 
       <button
         onClick={handleLogout}

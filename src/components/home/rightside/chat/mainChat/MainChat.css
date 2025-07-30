@@ -1,3 +1,4 @@
+/* === Asosiy chat konteyner === */
 .main-chat {
   height: 100%;
   overflow-y: auto;
@@ -12,6 +13,7 @@
   gap: 12px;
 }
 
+/* === Har bir xabarning konteyneri === */
 .message-wrapper {
   display: flex;
   align-items: flex-end;
@@ -23,13 +25,14 @@
   word-break: break-word;
 }
 
+/* === Foydalanuvchi yuborgan xabar === */
 .user-message {
   align-self: flex-end;
   background-color: #37d4ec;
   border-bottom-right-radius: 0;
 }
 
-/* Do‘st yuborgan */
+/* === Do‘st yuborgan xabar === */
 .friend-message {
   align-self: flex-start;
   background-color: #cfcdc0;
@@ -37,7 +40,7 @@
   border-bottom-left-radius: 0;
 }
 
-/* Avatarlar */
+/* === Avatarlar === */
 .avatar {
   width: 32px;
   height: 32px;
@@ -45,21 +48,61 @@
   object-fit: cover;
 }
 
-/* Xabar matni va rasm */
-.message-content p {
+/* === Matn, rasm va ovoz konteyneri === */
+.message-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+/* === Matn === */
+.message-content p,
+.message-content a {
   margin: 0;
   font-size: 14px;
   line-height: 1.5;
   color: #333;
+  word-break: break-word;
 }
 
+.message-content a {
+  color: #0066cc;
+  text-decoration: underline;
+}
+
+/* === Rasm === */
 .message-image {
   max-width: 200px;
   border-radius: 10px;
   margin-top: 6px;
 }
 
-/* Bo‘sh chat */
+/* === Audio/Video === */
+.message-content video {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 6px;
+}
+
+/* === Vaqt va statuslar === */
+.message-created-at {
+  font-size: 10px;
+  color: #585050;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.message-content .check-icon,
+.message-content .checkcheck-icon {
+  width: 14px;
+  height: 14px;
+  color: #1c0292;
+}
+
+/* === Bo‘sh chat (xabar yo‘q) === */
 .empty-chat-card {
   background-color: #e4dfdf;
   padding: 32px 24px;
@@ -95,23 +138,53 @@
   transform: scale(1.2);
 }
 
-.message-created-at {
-  bottom: 4px;
-  right: 8px;
-  font-size: 10px;
-  color: #585050;
+.video-link {
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+.video-link:hover {
+  color: #0056b3;
 }
 
-.message-content video {
-  width: 90%;
-  margin-top: -85px;
-}
+/* === RESPONSIVE STIL === */
+@media (max-width: 768px) {
+  .main-chat {
+    padding: 12px;
+    gap: 10px;
+  }
 
-.message-content .check-icon,
-.message-content .checkcheck-icon {
-  width: 14px;
-  height: 14px;
-  color: #1c0292;
-  margin-left: 4px;
-  vertical-align: middle;
+  .message-wrapper {
+    max-width: 90%;
+    font-size: 13px;
+  }
+
+  .message-image {
+    max-width: 100%;
+  }
+
+  .avatar {
+    width: 28px;
+    height: 28px;
+  }
+
+  .message-content video {
+    width: 100%;
+    margin-top: -60px;
+  }
+
+  .empty-chat-card {
+    padding: 24px 16px;
+  }
+
+  .main-text {
+    font-size: 16px;
+  }
+
+  .wave-button {
+    font-size: 28px;
+  }
 }

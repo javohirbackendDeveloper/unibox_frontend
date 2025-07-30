@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./MainChat.css";
 import { ChatStore } from "../../../../../stores/chat.store";
 import { AuthStore } from "../../../../../stores/auth.store";
 import dayjs from "dayjs";
-import { Check, CheckCheck, VideoOff } from "lucide-react";
+import { Check, CheckCheck } from "lucide-react";
 import { socket } from "../../../../../socket";
+import { Dialog } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function MainChat({ selectedChat }) {
   const { user, fetchUserInfo } = AuthStore();
@@ -16,6 +18,9 @@ function MainChat({ selectedChat }) {
     listenToMessages,
   } = ChatStore();
   const chatEndRef = useRef(null);
+  const [modalLink, setModalLink] = useState("");
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchUserInfo();
@@ -38,6 +43,17 @@ function MainChat({ selectedChat }) {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const isMobile = () => window.innerWidth < 768;
+
+  const handleLinkClick = (link) => {
+    if (isMobile()) {
+      setModalLink(link);
+      setOpen(true);
+    } else {
+      window.open(link, "_blank", "noopener,noreferrer");
+    }
+  };
+
   const handleSendMessage = () => {
     const formData = new FormData();
     formData.append("text", "Assalomu alaykum");
@@ -48,53 +64,67 @@ function MainChat({ selectedChat }) {
   return (
     <div className="main-chat">
       {messages?.length > 0 ? (
-        messages.map((message) => (
-          <div
-            key={message.friendship?.id}
-            className={`message-wrapper ${
-              message?.sender?.id === user?.id
-                ? "user-message"
-                : "friend-message"
-            }`}
-          >
-            <img
-              src={message?.sender?.image || "./avatar.png"}
-              alt="avatar"
-              className="avatar"
-            />
-            <div className="message-content">
-              {(message?.text && message.text.startsWith("http") && (
-                <a href={message.text} rel="noopener noreferer" target="_blank">
-                  {message.text}
-                </a>
-              )) || <p>{message?.text}</p>}
+        messages.map((message) => {
+          const isLink =
+            message?.text &&
+            message.text.startsWith("http") &&
+            message.text.includes("video-call");
 
-              {message?.voice && (
-                <video controls src={message.voice} type="audio/mpeg"></video>
-              )}
+          return (
+            <div
+              key={message.id}
+              className={`message-wrapper ${
+                message?.sender?.id === user?.id
+                  ? "user-message"
+                  : "friend-message"
+              }`}
+            >
+              <img
+                src={message?.sender?.image || "./avatar.png"}
+                alt="avatar"
+                className="avatar"
+              />
+              <div className="message-content">
+                {isLink ? (
+                  <span
+                    className="video-link"
+                    onClick={() => handleLinkClick(message.text)}
+                  >
+                    📹 Video qo‘ng‘iroq: Bosing
+                  </span>
+                ) : (
+                  <p>{message?.text}</p>
+                )}
 
-              {message?.image && (
-                <img
-                  src={message.image}
-                  alt="uploaded"
-                  className="message-image"
-                />
-              )}
-              <span className="message-created-at">
-                {dayjs(message?.createdAt).format("HH:mm")}
-              </span>
-              {message?.sender?.id === user?.id && (
+                {message?.voice && (
+                  <video controls src={message.voice} type="audio/mpeg" />
+                )}
+
+                {message?.image && (
+                  <img
+                    src={message.image}
+                    alt="uploaded"
+                    className="message-image"
+                  />
+                )}
+
                 <span className="message-created-at">
-                  {message?.isRead ? (
-                    <CheckCheck className="checkcheck-icon" />
-                  ) : (
-                    <Check className="check-icon" />
-                  )}
+                  {dayjs(message?.createdAt).format("HH:mm")}
                 </span>
-              )}
+
+                {message?.sender?.id === user?.id && (
+                  <span className="message-created-at">
+                    {message?.isRead ? (
+                      <CheckCheck className="checkcheck-icon" />
+                    ) : (
+                      <Check className="check-icon" />
+                    )}
+                  </span>
+                )}
+              </div>
             </div>
-          </div>
-        ))
+          );
+        })
       ) : (
         <div className="empty-chat-card">
           <p className="main-text">Hozircha xabarlar yo'q</p>
@@ -103,7 +133,23 @@ function MainChat({ selectedChat }) {
           </button>
         </div>
       )}
+
       <div ref={chatEndRef} />
+
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        fullWidth
+        maxWidth="md"
+      >
+        <iframe
+          src={modalLink}
+          title="Video Call"
+          width="100%"
+          height="500px"
+          style={{ border: "none" }}
+        ></iframe>
+      </Dialog>
     </div>
   );
 }

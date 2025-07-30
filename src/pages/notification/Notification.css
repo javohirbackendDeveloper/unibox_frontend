@@ -12,6 +12,8 @@
   cursor: pointer;
   font-weight: 500;
   transition: all 0.2s ease;
+  border: none;
+  background: none;
 }
 
 .notification-tabs .active {
@@ -74,18 +76,69 @@
   background-color: #145a9e;
 }
 
+.accept_btn {
+  margin-right: 10px;
+}
+
+/* ===== Modal Header ===== */
+
 .dialogtitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  text-align: center;
   font-weight: 600;
   font-size: 1.2rem;
+  padding: 8px 48px 8px 16px;
+  box-sizing: border-box;
+}
+
+.dialogtitle-text {
+  flex: 1;
+  text-align: center;
 }
 
 .x-icon {
   position: absolute;
-  left: 200px;
+  right: -25px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
 
-.accept_btn {
-  margin-right: 10px;
+/* ===== Responsive styles ===== */
+
+@media (max-width: 600px) {
+  .notification-tabs {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .notification-tabs button {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .invite-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .invite-info img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .invite-actions button {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .dialogtitle {
+    font-size: 1rem;
+    padding-right: 48px;
+  }
 }

@@ -8,6 +8,8 @@ export const ChatStore = create((set, get) => ({
 
   async sendMessage(data, friendshipId) {
     try {
+      console.log({ data });
+
       const res = await axiosMultipartHeader.post("/api/message", data);
 
       if (res.data?.id) {

@@ -6,7 +6,7 @@
   background-color: #000;
   border-radius: 12px;
   width: 40%;
-  margin-left: 500px;
+  margin: 0 auto;
 }
 
 .audio-btn {
@@ -43,12 +43,36 @@
 .delete-btn {
   color: #e74c3c;
 }
+
 .mic-btn {
   color: #4caf50;
 }
+
 .pause-btn {
   color: #ff9800;
 }
+
 .play-btn {
   color: #2196f3;
+}
+
+@media (max-width: 768px) {
+  .audio-handler {
+    width: 90%;
+    gap: 12px;
+    padding: 8px 12px;
+  }
+
+  .audio-btn {
+    padding: 6px;
+  }
+
+  .audio-wave {
+    gap: 3px;
+    height: 24px;
+  }
+
+  .audio-wave span {
+    width: 3px;
+  }
 }

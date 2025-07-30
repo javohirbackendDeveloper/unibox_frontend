@@ -1,7 +1,8 @@
-import * as React from "react";
+import React, { useEffect, useRef } from "react";
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
 import { axiosInstance } from "../../stores/axios/axiosInstance";
 import { AuthStore } from "../../stores/auth.store";
+import "./VideoCall.css";
 
 function randomID(len = 5) {
   const chars =
@@ -13,14 +14,14 @@ function randomID(len = 5) {
   return result;
 }
 
-export function getUrlParams(url = window.location.href) {
+function getUrlParams(url = window.location.href) {
   const urlStr = url.split("?")[1];
   return new URLSearchParams(urlStr);
 }
 
 export default function VideoCall() {
   const { user, fetchUserInfo } = AuthStore();
-  const callContainerRef = React.useRef(null);
+  const callContainerRef = useRef(null);
 
   let roomID = getUrlParams().get("roomID");
   if (!roomID) {
@@ -29,11 +30,11 @@ export default function VideoCall() {
     window.history.replaceState(null, "", newURL);
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchUserInfo();
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const initMeeting = async () => {
       if (!user?.id || !callContainerRef.current) return;
 
@@ -55,7 +56,7 @@ export default function VideoCall() {
           container: callContainerRef.current,
           sharedLinks: [
             {
-              name: "Personal link",
+              name: "Ulashish havolasi",
               url:
                 window.location.protocol +
                 "//" +
@@ -70,18 +71,12 @@ export default function VideoCall() {
           },
         });
       } catch (error) {
-        console.error("Failed to initialize Zego meeting:", error);
+        console.error("Zego meeting xatosi:", error);
       }
     };
 
     initMeeting();
   }, [user, roomID]);
 
-  return (
-    <div
-      className="myCallContainer"
-      ref={callContainerRef}
-      style={{ width: "100vw", height: "100vh" }}
-    ></div>
-  );
+  return <div className="video-call-container" ref={callContainerRef}></div>;
 }

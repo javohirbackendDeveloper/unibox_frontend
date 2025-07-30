@@ -29,7 +29,7 @@ function NotificationModal({ open, onClose }) {
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
       <DialogTitle className="dialogtitle">
-        Bildirishnomalar
+        <span className="dialogtitle-text">Bildirishnomalar</span>
         <IconButton onClick={() => onClose(false)} className="x-icon">
           <X />
         </IconButton>

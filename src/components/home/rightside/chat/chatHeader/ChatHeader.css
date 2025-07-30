@@ -6,6 +6,7 @@
   padding: 12px 16px;
   border-bottom: 1px solid #eee;
   background-color: #fff;
+  position: relative;
 }
 
 /* Profil tugmasi */
@@ -63,6 +64,18 @@
   color: #111;
 }
 
+/* Ortga tugmasi */
+.left_icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #555;
+  display: none; /* default holatda yashiringan */
+  align-items: center;
+  justify-content: center;
+}
+
 /* === MODAL (Dialog) === */
 
 .dialog-content {
@@ -102,8 +115,6 @@
   color: #e63946;
 }
 
-/* Foydalanuvchilar ro'yhati */
-
 .user-row {
   display: flex;
   align-items: center;
@@ -112,7 +123,6 @@
   position: relative;
 }
 
-/* Avatar + online indikatorni o'rash uchun konteyner */
 .avatar-wrapper {
   position: relative;
   width: 48px;
@@ -153,6 +163,7 @@
 .online-text {
   color: #28c76f;
 }
+
 .icon-btn {
   background: transparent;
   border: none;
@@ -161,4 +172,30 @@
   margin: 0;
   display: flex;
   align-items: center;
+}
+
+/* RESPONSIVE QISM */
+@media (max-width: 768px) {
+  .left_icon {
+    display: flex;
+    margin-right: -100px;
+  }
+
+  .chat-header {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .main-header-btn .header-text span:first-child {
+    font-size: 13px;
+  }
+
+  .main-header-btn .header-text span:last-child {
+    font-size: 11px;
+  }
+
+  .header-icons {
+    gap: 16px;
+  }
 }

@@ -21,6 +21,7 @@ body {
   overflow-y: auto;
 }
 
+/* Toolbar */
 .container .ql-toolbar.ql-snow {
   display: flex;
   justify-content: center;
@@ -33,6 +34,7 @@ body {
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Editor container */
 .container .ql-container.ql-snow {
   border: none;
   display: flex;
@@ -42,6 +44,7 @@ body {
   overflow-y: auto;
 }
 
+/* Main editor area */
 .container .ql-editor {
   width: 515pt;
   min-height: 842pt;
@@ -51,6 +54,24 @@ body {
   line-height: 1.6;
 }
 
+/* Yuklab olish tugmasi */
+.download-btn {
+  align-self: flex-end;
+  margin: 20px;
+  padding: 8px 16px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.download-btn:hover {
+  background-color: #005fa3;
+}
+
+/* Chop qilish uchun moslashuv */
 @media print {
   body {
     background: none;
@@ -72,20 +93,43 @@ body {
     box-shadow: none;
     margin: 0;
   }
+
+  .download-btn {
+    display: none;
+  }
 }
 
-.download-btn {
-  margin-left: 80%;
-  margin-bottom: 60px;
-  padding: 8px 12px;
-  background-color: #0077cc;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
+/* ✅ RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .container .ql-toolbar.ql-snow {
+    flex-wrap: wrap;
+    padding: 5px;
+    justify-content: flex-start;
+  }
+
+  .container .ql-editor {
+    width: 100%;
+    min-height: 100%;
+    padding: 16px;
+    font-size: 11pt;
+  }
+
+  .download-btn {
+    width: calc(100% - 40px);
+    align-self: center;
+    margin: 10px auto 30px auto;
+    font-size: 14px;
+  }
 }
 
-.download-btn:hover {
-  background-color: #005fa3;
+@media (max-width: 480px) {
+  .container .ql-editor {
+    padding: 12px;
+    font-size: 10pt;
+  }
+
+  .download-btn {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
 }

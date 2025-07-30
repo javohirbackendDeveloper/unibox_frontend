@@ -78,3 +78,48 @@
   font-size: 14px;
   margin-bottom: 10px;
 }
+
+/* RESPONSIVE PART */
+
+@media (max-width: 480px) {
+  .auth-box {
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  }
+
+  .auth-box h1 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .auth-input,
+  .auth-button {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  .auth-link {
+    font-size: 13px;
+  }
+
+  .error-message {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .auth-box {
+    padding: 32px;
+    max-width: 90%;
+  }
+
+  .auth-box h1 {
+    font-size: 22px;
+  }
+
+  .auth-input,
+  .auth-button {
+    font-size: 15px;
+  }
+}

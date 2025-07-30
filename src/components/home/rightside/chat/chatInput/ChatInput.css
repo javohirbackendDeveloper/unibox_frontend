@@ -1,4 +1,3 @@
-/* ChatInput.css */
 .chat-input-container {
   display: flex;
   align-items: center;
@@ -6,14 +5,21 @@
   gap: 12px;
   border-top: 1px solid #ddd;
   background-color: #fff;
+  position: relative;
 }
 
-.chat-input-container .icon {
+.chat-input-container .icon,
+.file-upload-label .icon {
   cursor: pointer;
   color: #666;
   width: 24px;
   height: 24px;
   transition: color 0.3s ease;
+}
+
+.chat-input-container .icon:hover,
+.file-upload-label .icon:hover {
+  color: #111;
 }
 
 .hidden-file-input {
@@ -22,21 +28,8 @@
 
 .file-upload-label {
   cursor: pointer;
-}
-
-.file-upload-label .icon {
-  color: #666;
-  width: 24px;
-  height: 24px;
-  transition: color 0.3s ease;
-}
-
-.file-upload-label .icon:hover {
-  color: #000;
-}
-
-.chat-input-container .icon:hover {
-  color: #111;
+  display: flex;
+  align-items: center;
 }
 
 .chat-input {
@@ -53,15 +46,42 @@
   border-color: #007bff;
 }
 
-.mic-icon {
-  color: #007bff;
-}
-
 .btn {
   border: none;
   background-color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
 }
 
 .active {
   color: blue;
+}
+
+.mic-icon {
+  color: #007bff;
+}
+
+@media (max-width: 600px) {
+  .chat-input-container {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .chat-input {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  .chat-input-container .icon,
+  .file-upload-label .icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .emoji-picker-react {
+    max-width: 100vw;
+  }
 }
