@@ -1,4 +1,3 @@
-/* === Asosiy chat konteyner === */
 .main-chat {
   height: 100%;
   overflow-y: auto;
@@ -13,7 +12,6 @@
   gap: 12px;
 }
 
-/* === Har bir xabarning konteyneri === */
 .message-wrapper {
   display: flex;
   align-items: flex-end;
@@ -25,14 +23,12 @@
   word-break: break-word;
 }
 
-/* === Foydalanuvchi yuborgan xabar === */
 .user-message {
   align-self: flex-end;
   background-color: #37d4ec;
   border-bottom-right-radius: 0;
 }
 
-/* === Do‘st yuborgan xabar === */
 .friend-message {
   align-self: flex-start;
   background-color: #cfcdc0;
@@ -40,7 +36,6 @@
   border-bottom-left-radius: 0;
 }
 
-/* === Avatarlar === */
 .avatar {
   width: 32px;
   height: 32px;
@@ -48,7 +43,6 @@
   object-fit: cover;
 }
 
-/* === Matn, rasm va ovoz konteyneri === */
 .message-content {
   display: flex;
   flex-direction: column;
@@ -56,7 +50,6 @@
   position: relative;
 }
 
-/* === Matn === */
 .message-content p,
 .message-content a {
   margin: 0;
@@ -71,21 +64,18 @@
   text-decoration: underline;
 }
 
-/* === Rasm === */
 .message-image {
   max-width: 200px;
   border-radius: 10px;
   margin-top: 6px;
 }
 
-/* === Audio/Video === */
 .message-content video {
   width: 100%;
   border-radius: 8px;
   margin-top: 6px;
 }
 
-/* === Vaqt va statuslar === */
 .message-created-at {
   font-size: 10px;
   color: #585050;
@@ -102,7 +92,6 @@
   color: #1c0292;
 }
 
-/* === Bo‘sh chat (xabar yo‘q) === */
 .empty-chat-card {
   background-color: #e4dfdf;
   padding: 32px 24px;
@@ -150,7 +139,6 @@
   color: #0056b3;
 }
 
-/* === RESPONSIVE STIL === */
 @media (max-width: 768px) {
   .main-chat {
     padding: 12px;

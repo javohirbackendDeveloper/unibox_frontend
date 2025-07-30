@@ -65,10 +65,7 @@ function MainChat({ selectedChat }) {
     <div className="main-chat">
       {messages?.length > 0 ? (
         messages.map((message) => {
-          const isLink =
-            message?.text &&
-            message.text.startsWith("http") &&
-            message.text.includes("video-call");
+          const isLink = message?.text && message.text.startsWith("http");
 
           return (
             <div
@@ -90,7 +87,7 @@ function MainChat({ selectedChat }) {
                     className="video-link"
                     onClick={() => handleLinkClick(message.text)}
                   >
-                    📹 Video qo‘ng‘iroq: Bosing
+                    {message.text}
                   </span>
                 ) : (
                   <p>{message?.text}</p>

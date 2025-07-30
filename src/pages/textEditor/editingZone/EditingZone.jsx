@@ -6,13 +6,27 @@ import { socket } from "../../../socket";
 import "./EditingZone.css";
 import jsPDF from "jspdf";
 import { TOOLBAR_OPTIONS } from "../../../dummyData/textEditor";
+import { Dialog } from "@mui/material";
+import { X } from "lucide-react";
+import { FriendshipStore } from "../../../stores/friendshipStore";
+import { AuthStore } from "../../../stores/auth.store";
+import dayjs from "dayjs";
+import { ChatStore } from "../../../stores/chat.store";
+import { toast } from "sonner";
 
 const SAVE_INTERVAL_MS = 2000;
 
 export default function EditingZone() {
   const { id: documentId } = useParams();
   const [quill, setQuill] = useState(null);
+  const [openContactModal, setOpenContactModal] = useState(false);
+  const { getMyFriends, chats } = FriendshipStore();
+  const { onlineUsers, user, fetchUserInfo } = AuthStore();
+  const { sendMessage } = ChatStore();
 
+  useEffect(() => {
+    fetchUserInfo();
+  }, []);
   useEffect(() => {
     return () => {
       socket.disconnect();
@@ -100,6 +114,22 @@ export default function EditingZone() {
     });
   };
 
+  useEffect(() => {
+    getMyFriends();
+  }, []);
+
+  const sendDocumentUrl = async (friendship) => {
+    const currentUrl = window.location.href;
+    const res = await sendMessage(
+      { text: currentUrl, friendship: friendship?.id },
+      { friendshipId: friendship?.id }
+    );
+
+    if (res) {
+      toast.success("Link yuborildi");
+    }
+  };
+
   return (
     <div className="container">
       <div ref={wrapperRef}></div>
@@ -107,8 +137,72 @@ export default function EditingZone() {
         <button onClick={generatePdf} className="download-btn">
           ⬇ Yuklab olish
         </button>
-        <button className="contact-btn">📇 Kontaktlarni qo'shish</button>
+        <button
+          className="contact-btn"
+          onClick={() => setOpenContactModal(!openContactModal)}
+        >
+          📇 Kontaktlarni qo'shish
+        </button>
       </div>
+
+      <Dialog
+        open={openContactModal}
+        onClose={setOpenContactModal}
+        PaperProps={{ className: "editing-dialog-paper" }}
+      >
+        <div className="editing-dialog">
+          <X
+            onClick={() => setOpenContactModal(false)}
+            className="close-icon"
+          />
+          <span className="dialog-title">Kontaktlar</span>
+
+          {chats.length > 0 ? (
+            <div className="editing-chat-list">
+              {chats.map((chat, idx) => (
+                <div className="editing-chat-item" key={idx}>
+                  <div className="editing-avatar-wrapper">
+                    <img
+                      src={chat?.user?.image || "/avatar.png"}
+                      alt="avatar"
+                      className="editing-avatar"
+                    />
+                    {onlineUsers.includes(chat?.user?.id) && (
+                      <span className="editing-online-indicator"></span>
+                    )}
+                  </div>
+
+                  <div className="editing-chat-content">
+                    <div className="editing-chat-info">
+                      <p className="editing-chat-name">
+                        {chat?.user?.name ||
+                          chat?.user?.email?.split("@")[0] ||
+                          "Private chat"}
+                      </p>
+                      <div className="editing-chat-meta">
+                        {chat?.user?.id === user?.id && (
+                          <CheckCheck className="check-icon" size={14} />
+                        )}
+                        <span className="editing-chat-time">
+                          {dayjs(chat?.friendship?.createdAt).format("HH:mm")}
+                        </span>
+                      </div>
+                    </div>
+                    <button
+                      className="editing-send-btn"
+                      onClick={() => sendDocumentUrl(chat?.friendship)}
+                    >
+                      Yuborish
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="editing-no-chat">Hozircha chatlar mavjud emas</div>
+          )}
+        </div>
+      </Dialog>
     </div>
   );
 }
