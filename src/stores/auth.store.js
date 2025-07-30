@@ -14,10 +14,11 @@ export const AuthStore = create((set, get) => ({
     try {
       const res = await axiosInstance.post("/api/auth/login", data);
 
+      console.log({ res });
+
       if (res.data?.accessToken) {
         window.localStorage.setItem("accessToken", res.data?.accessToken);
         socket.connect();
-        console.log(navigate);
         // location.reload();
         toast.success(res.data?.message);
         navigate("/");
