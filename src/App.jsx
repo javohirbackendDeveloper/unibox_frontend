@@ -27,7 +27,6 @@ function App() {
           await fetchUserInfo();
         } else {
           const userData = await account.get();
-          console.log({ userData });
 
           // setUser(userData);
         }
@@ -53,6 +52,8 @@ function App() {
       setOfflineUser(userId);
     });
   }, []);
+
+  console.log({ user });
 
   return (
     <div>
