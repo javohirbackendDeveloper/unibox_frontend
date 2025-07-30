@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Bell, File, LogOut, Search, User } from "lucide-react";
-import "./leftHeader.css";
+import "./LeftHeader.css";
 import { AuthStore } from "../../../../stores/auth.store";
 import SearchModal from "../../../../pages/searchModal/SearchModal";
 import { Link, useNavigate } from "react-router-dom";
