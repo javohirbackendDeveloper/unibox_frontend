@@ -2,7 +2,7 @@
   height: 100%;
   overflow-y: auto;
   padding: 20px;
-  background-image: url("./chatBc.png");
+  background-image: url("/chatBc.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

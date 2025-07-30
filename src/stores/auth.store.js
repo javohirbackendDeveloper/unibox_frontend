@@ -69,12 +69,21 @@ export const AuthStore = create((set, get) => ({
 
   async logout(navigate) {
     try {
-      location.reload();
-      socket.disconnect();
-      navigate("/login");
       const res = await axiosInstance.post("/api/auth/logout");
-      await account.deleteSession("current");
+
+      console.log({ res });
+
       window.localStorage.removeItem("accessToken");
+
+      // await account.deleteSession("current");
+
+      socket.disconnect();
+
+      navigate("/login");
+
+      setTimeout(() => {
+        location.reload();
+      }, 2000);
     } catch (err) {
       console.log(err);
     }
