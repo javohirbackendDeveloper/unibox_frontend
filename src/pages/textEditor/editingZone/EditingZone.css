@@ -1,6 +1,4 @@
-*,
-*::before,
-*::after {
+* {
   box-sizing: border-box;
 }
 
@@ -11,13 +9,9 @@ body {
 }
 
 .container {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-}
-
-.container > div:first-child {
-  flex-grow: 1;
   overflow-y: auto;
 }
 
@@ -44,25 +38,40 @@ body {
   overflow-y: auto;
 }
 
-/* Main editor area */
 .container .ql-editor {
   width: 515pt;
-  min-height: 842pt;
+  min-height: 400pt;
   padding: 30pt;
   background-color: white;
   font-size: 12pt;
   line-height: 1.6;
 }
 
+.button-group {
+  display: flex;
+  gap: 12px;
+  padding: 20px;
+  justify-content: flex-start;
+}
+
 /* Yuklab olish tugmasi */
 .download-btn {
-  align-self: flex-end;
-  margin: 20px;
-  padding: 8px 16px;
+  padding: 10px 18px;
   background-color: #0077cc;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Kontakt tugmasi */
+.contact-btn {
+  padding: 10px 18px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
 }
@@ -71,65 +80,48 @@ body {
   background-color: #005fa3;
 }
 
-/* Chop qilish uchun moslashuv */
-@media print {
-  body {
-    background: none;
-  }
+.contact-btn:hover {
+  background-color: #218838;
+}
 
-  .container .ql-toolbar.ql-snow {
+/* Print rejimda tugmalar ko‘rinmasin */
+@media print {
+  .ql-toolbar.ql-snow,
+  .download-btn,
+  .contact-btn {
     display: none;
   }
 
-  .container .ql-container.ql-snow {
-    justify-content: flex-start;
-    padding: 0;
-  }
-
-  .container .ql-editor {
+  .ql-editor {
     width: 6.5in;
     height: 9in;
     padding: 0.5in;
     box-shadow: none;
     margin: 0;
   }
-
-  .download-btn {
-    display: none;
-  }
 }
 
-/* ✅ RESPONSIVE DESIGN */
+/* Responsive */
 @media (max-width: 768px) {
   .container .ql-toolbar.ql-snow {
     flex-wrap: wrap;
-    padding: 5px;
     justify-content: flex-start;
+    padding: 5px;
   }
 
   .container .ql-editor {
     width: 100%;
-    min-height: 100%;
     padding: 16px;
-    font-size: 11pt;
   }
 
-  .download-btn {
-    width: calc(100% - 40px);
-    align-self: center;
-    margin: 10px auto 30px auto;
+  .button-group {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .download-btn,
+  .contact-btn {
+    width: 90%;
     font-size: 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  .container .ql-editor {
-    padding: 12px;
-    font-size: 10pt;
-  }
-
-  .download-btn {
-    font-size: 13px;
-    padding: 6px 12px;
   }
 }

@@ -11,7 +11,7 @@ const SAVE_INTERVAL_MS = 2000;
 
 export default function EditingZone() {
   const { id: documentId } = useParams();
-  const [quill, setQuill] = useState();
+  const [quill, setQuill] = useState(null);
 
   useEffect(() => {
     return () => {
@@ -20,7 +20,7 @@ export default function EditingZone() {
   }, []);
 
   useEffect(() => {
-    if (socket == null || quill == null) return;
+    if (!socket || !quill) return;
 
     socket.once("load-document", (document) => {
       quill.setContents(document);
@@ -31,7 +31,7 @@ export default function EditingZone() {
   }, [socket, quill, documentId]);
 
   useEffect(() => {
-    if (socket == null || quill == null) return;
+    if (!socket || !quill) return;
 
     const interval = setInterval(() => {
       socket.emit("save-document", quill.getContents());
@@ -41,7 +41,7 @@ export default function EditingZone() {
   }, [socket, quill]);
 
   useEffect(() => {
-    if (socket == null || quill == null) return;
+    if (!socket || !quill) return;
 
     const handler = (delta) => {
       quill.updateContents(delta);
@@ -52,7 +52,7 @@ export default function EditingZone() {
   }, [socket, quill]);
 
   useEffect(() => {
-    if (socket == null || quill == null) return;
+    if (!socket || !quill) return;
 
     const handler = (delta, oldDelta, source) => {
       if (source !== "user") return;
@@ -101,19 +101,14 @@ export default function EditingZone() {
   };
 
   return (
-    <div
-      className="container"
-      style={{ display: "flex", flexDirection: "column" }}
-    >
-      <div ref={wrapperRef} style={{ flexGrow: 1 }}></div>
-
-      <button
-        onClick={generatePdf}
-        className="download-btn"
-        style={{ marginTop: "10px", alignSelf: "flex-start" }}
-      >
-        ⬇ Yuklab olish
-      </button>
+    <div className="container">
+      <div ref={wrapperRef}></div>
+      <div className="button-group">
+        <button onClick={generatePdf} className="download-btn">
+          ⬇ Yuklab olish
+        </button>
+        <button className="contact-btn">📇 Kontaktlarni qo'shish</button>
+      </div>
     </div>
   );
 }
