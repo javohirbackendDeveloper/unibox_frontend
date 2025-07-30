@@ -14,8 +14,6 @@ const OAuthCallback = () => {
 
         const res = await login({ email: appwriteUser.email }, navigate);
 
-        console.log({ res });
-
         if (res) navigate("/");
       } catch (err) {
         console.error("OAuth callback error", err);

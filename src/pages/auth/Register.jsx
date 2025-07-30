@@ -37,8 +37,8 @@ const Register = () => {
   const handleGoogleLogin = async () => {
     account.createOAuth2Session(
       "google",
-      "http://localhost:5173/login",
-      "http://localhost:5173/fail"
+      "https://unibox-frontend-spxn.vercel.app/login",
+      "https://unibox-frontend-spxn.vercel.app/fail"
     );
   };
 

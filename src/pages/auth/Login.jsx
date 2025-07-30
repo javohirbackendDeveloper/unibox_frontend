@@ -23,8 +23,8 @@ const Login = () => {
   const handleGoogleLogin = async () => {
     account.createOAuth2Session(
       "google",
-      "http://localhost:5173/oauth-callback",
-      "http://localhost:5173/fail"
+      "https://unibox-frontend-spxn.vercel.app/oauth-callback",
+      "https://unibox-frontend-spxn.vercel.app/fail"
     );
   };
 
